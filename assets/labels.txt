@@ -1,0 +1,6 @@
+keyboard
+laptop
+monitor
+mug
+person
+plant
