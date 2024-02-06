@@ -38,11 +38,7 @@ class _RunModelByImageDemoState extends State<RunModelByImageDemo> {
           labelPath: labelPath,
           objectDetectionModelType: ObjectDetectionModelType.yolov8);
     } catch (e) {
-      if (e is PlatformException) {
-        print("only supported for android, Error is $e");
-      } else {
-        print("Error is $e");
-      }
+      print("Error $e");
     }
   }
 
@@ -84,15 +80,6 @@ class _RunModelByImageDemoState extends State<RunModelByImageDemo> {
   String inferenceTimeAsString(Stopwatch stopwatch) =>
       "Inference Took ${stopwatch.elapsed.inMilliseconds} ms";
 
-/*
-  //run a custom model with number inputs
-  Future runCustomModel() async {
-    _prediction = await _customModel!
-        .getPrediction([1, 2, 3, 4], [1, 2, 2], DType.float32);
-
-    setState(() {});
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,14 +135,6 @@ class _RunModelByImageDemoState extends State<RunModelByImageDemo> {
           if (!snap.hasData) return const SizedBox();
 
           return LayoutBuilder(builder: (context, constraints) {
-            debugPrint(
-                'Max height: ${constraints.maxHeight}, max width: ${constraints.maxWidth}');
-            debugPrint(
-                'Max height: ${snap.data!.height.toDouble()}, max width: ${constraints.maxWidth}');
-            debugPrint(
-                'image height: ${snap.data!.height.toDouble()}, image width: ${snap.data!.width.toDouble()}');
-
-            // Calculate the scaling factors for the boxes based on the layout constraints
             final aspectRatio = snap.data!.width / snap.data!.height;
 
             double factorX = constraints.maxWidth;
@@ -176,7 +155,6 @@ class _RunModelByImageDemoState extends State<RunModelByImageDemo> {
                   }
                   Color usedColor;
                   if (boxesColor == null) {
-                    //change colors for each label
                     usedColor = Colors.primaries[
                         ((re.className ?? re.classIndex.toString()).length +
                                 (re.className ?? re.classIndex.toString())

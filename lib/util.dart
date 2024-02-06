@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as image_lib;
 
-// ImageUtils
 class ImageUtils {
   // Converts a [CameraImage] in YUV420 format to [imageLib.Image] in RGB format
   static image_lib.Image? convertCameraImage(CameraImage cameraImage) {
